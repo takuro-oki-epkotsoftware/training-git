@@ -1,0 +1,21 @@
+/*reset*/
+body,div p{margin: 0;}
+.clearfix:after{
+    content:"";
+    display: block;
+    clear: both;
+}
+
+/*frame*/
+body{
+    height: 100%;
+    color: #ccc;
+    font-size: 10px;
+}
+
+#wrapper{
+    border: 2px dashed #ccc;
+    margin: 15px;
+    border-radius: 6px;
+    height: 600px;
+}

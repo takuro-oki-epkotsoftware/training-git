@@ -57,7 +57,7 @@ Dockerを使って環境を構築します。
 [.env](./.env)ファイルの各名称・ポート設定をしてください。  
 基本的にはそのまま使用可能ですが、IPとポートが重複するとコンテナが起動しないので  
 自身の環境に合わせて設定を変えてください。
-http://localhost:8888
+http://localhost:8080
 ### compose
 
 以下のコマンドを実行します。
@@ -80,6 +80,7 @@ Laravel関連のコマンドはDockerで用意した、WEBサーバー（コン�
 # ターミナルで実行
 ## WEBサーバーに入るコマンド(winptyを求められる場合があります)
 docker exec -it laravel9-web bash
+winpty docker exec -it laravel9-web bash
 ```
 
 #### composer install
@@ -113,7 +114,7 @@ chmod -R 777 storage/
   - <http://localhost:80/>  
     [htdocs/index.php](./htdocs/index.php)の実行結果が画面に表示されます。
 - phpMyAdmin ※ ポート番号は [`.env`](./.env) の `PORT_PHPMYADMIN` を参照
-  - <http://localhost:8888>
+  - <http://localhost:8080>
 
 ### SQLクライアント
 

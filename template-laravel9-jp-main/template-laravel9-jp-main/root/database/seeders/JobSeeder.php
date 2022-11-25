@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Database\Factories\JobFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Job;
 
 class JobSeeder extends Seeder
 {

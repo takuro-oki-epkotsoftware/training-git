@@ -76,4 +76,53 @@ class JobController extends Controller
         $job->delete();
         return redirect(route('admin.jobs.index'));
     }
+    public function csv()
+    {
+        // CSVダウンロード
+        //   CSVレコード配列取得
+        $csvRecords = self::getJobCsvRecords();
+
+        //   CSVストリームダウンロード
+        return self::streamDownloadCsv('jobs.csv', $csvRecords);
+    }
+
+    private static function getJobCsvRecords(): array
+    {
+        // id 降順で全レコード取得
+        $jobs = Job::orderByDesc('id')->get();
+
+        $csvRecords = [
+            ['ID', '名称'], // ヘッダー
+        ];
+        foreach ($jobs as $job) {
+            $csvRecords[] = [$job->id, $job->name]; // レコード
+        }
+        return $csvRecords;
+    }
+
+    private static function streamDownloadCsv(
+        string $name,
+        iterable $fieldsList,
+        string $separator = ',',
+        string $enclosure = '"',
+        string $escape = "\\",
+        string $eol = "\r\n"
+    ) {
+        // Content-Type
+        $contentType = 'text/plain'; // テキストファイル
+        if ($separator === ',') {
+            $contentType = 'text/csv'; // CSVファイル
+        } elseif ($separator === "\t") {
+            $contentType = 'text/tab-separated-values'; // TSVファイル
+        }
+        $headers = ['Content-Type' => $contentType];
+
+        return response()->streamDownload(function () use ($fieldsList, $separator, $enclosure, $escape, $eol) {
+            $stream = fopen('php://output', 'w');
+            foreach ($fieldsList as $fields) {
+                fputcsv($stream, $fields, $separator, $enclosure, $escape, $eol);
+            }
+            fclose($stream);
+        }, $name, $headers);
+    }
 }

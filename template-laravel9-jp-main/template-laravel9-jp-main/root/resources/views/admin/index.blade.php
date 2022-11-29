@@ -11,5 +11,8 @@
 @endsection
 
 @section('script')
-
+<form action="{{ route('admin.jobs.csv') }}" method="POST">
+  @csrf
+  <button type="submit" class="btn btn-primary">CSV</button>
+</form>
 @endsection

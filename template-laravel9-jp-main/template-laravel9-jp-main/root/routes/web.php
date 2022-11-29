@@ -12,11 +12,13 @@ use App\Http\Controllers\JobController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('',function(){
+    return view('admin/base');
+});
 // admin
 Route::prefix('admin')->name('admin')->group(function () {
     // admin/
-    Route::view('admin/jobs', 'admin.index')->name('.index');
+    Route::view('admin/job', 'admin.index')->name('.index');
     // admin/jobs    admin.jobs
     // App\Http\Controllers\JobController
     Route::prefix('jobs')->name('.jobs')->controller(JobController::class)->group(function () {

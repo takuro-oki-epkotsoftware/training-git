@@ -83,7 +83,16 @@ class JobController extends Controller
         $csvRecords = self::getJobCsvRecords();
 
         //   CSVストリームダウンロード
-        return self::streamDownloadCsv('jobs.csv', $csvRecords);
+        return self::streamDownloadCsv('jobs.csv', $csvRecords,',');
+    }
+    public function tsv()
+    {
+        // tsvダウンロード
+        //   tsvレコード配列取得
+        $csvRecords = self::getJobCsvRecords();
+        //   TSVストリームダウンロード
+        return self::streamDownloadCsv('jobs.tsv', $csvRecords,"\t");
+        
     }
 
     private static function getJobCsvRecords(): array
@@ -99,11 +108,12 @@ class JobController extends Controller
         }
         return $csvRecords;
     }
+    
 
     private static function streamDownloadCsv(
         string $name,
         iterable $fieldsList,
-        string $separator = ',',
+        string $separator ,
         string $enclosure = '"',
         string $escape = "\\",
         string $eol = "\r\n"

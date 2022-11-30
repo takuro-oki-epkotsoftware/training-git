@@ -31,5 +31,6 @@ Route::prefix('admin')->name('admin')->group(function () {
         Route::get('{job}/edit', 'edit')->name('.edit');
         Route::post('{job}/confirm', 'confirm')->name('.confirm');
         Route::post('csv', 'csv')->name('.csv');
+        Route::post('tsv', 'tsv')->name('.tsv');
     });
 });

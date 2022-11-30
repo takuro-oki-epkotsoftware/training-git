@@ -15,4 +15,8 @@
   @csrf
   <button type="submit" class="btn btn-primary">CSV</button>
 </form>
+<form action="{{ route('admin.jobs.tsv') }}" method="POST">
+  @csrf
+  <button type="submit" class="btn btn-primary">TSV</button>
+</form>
 @endsection
